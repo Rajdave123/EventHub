@@ -1,0 +1,17 @@
+from django.contrib import admin
+
+from .models import Event, Reservation
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'venue', 'date', 'status', 'available_seats', 'total_seats')
+    list_filter = ('status', 'date')
+    search_fields = ('title', 'venue')
+
+
+@admin.register(Reservation)
+class ReservationAdmin(admin.ModelAdmin):
+    list_display = ('attendee_name', 'attendee_email', 'event', 'seats_reserved', 'status', 'created_at')
+    list_filter = ('status', 'event')
+    search_fields = ('attendee_name', 'attendee_email', 'event__title')
